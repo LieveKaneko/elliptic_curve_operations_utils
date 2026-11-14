@@ -32,3 +32,10 @@ The point at infinity is represented by `None`, not by a special `Point` value. 
 - `curve.add(p1, p2)` — returns the sum, or `None` for the identity. Raises `ValueError` if either input is not on the curve.
 - `curve.mul(k, point)` — returns `k * point` using double-and-add. `k` may be zero or negative. Raises `TypeError` if `k` is not an integer, and `ValueError` if `point` is not on the curve.
 - `Point(x, y)` — an immutable affine point.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
